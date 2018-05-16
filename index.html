@@ -3,19 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Dapp石头剪刀布(制胜策略)</title>
+    <style>
+        header{
+            font-size:30px;
+            color:rgb(42, 115, 138);
+            text-decoration: none;
+            padding: 30px 100px;
+        }
+        .all{
+            margin-bottom: 90px;
+        }
+        .all div{
+            border: 1px solid rgb(42, 115, 138);
+            padding: 20px 0;
+            width:700px;
+            margin: 0 auto;
+        }
+        .all div h2{
+            font-weight: normal;
+            font-size: 22px;
+            padding: 0 7%;
+        }
+        .all div ul{
+            display: flex;
+            justify-content: space-around;
+            margin:0 auto;
+            list-style: none;
+        }
+        .all div ul span{
+            display: block;
+            text-align: center;
+        }
+        .game{
+            width: 500px;
+            margin: 0 auto;
+            border: 1px solid rgb(42, 115, 138);
+            height: 260px;
+        }
+        .game div{
+
+        }
+        .game ul{
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            
+        }
+        .game ul li{
+            width: 50%;
+            text-align: center;
+        }
+        .game ul span{
+            display: block;
+            text-align: center;
+
+        }
+
+    </style>
 </head>
 <body>
+<header>幸运链--DAPP石头，剪刀，布</header>
 <div class="all">
-    <img src="img/shitou.jpg" class="shitou" alt="">
-    <img src="img/jiandao.jpg" class="jiandao" alt="">
-    <img src="img/bu.jpg" class="bu" alt="">
+    <div>
+        <h2>您选择出</h2>
+        <ul>
+            <li>
+                <img src="img/shitou.jpg" class="shitou" alt="">
+                <span>石头</span>
+            </li>
+            <li>
+                <img src="img/jiandao.jpg" class="jiandao" alt="">
+                <span>剪刀</span>
+            </li>
+            <li>
+                <img src="img/bu.jpg" class="bu" alt="">
+                <span>布</span>
+            </li>
+        </ul>
+    </div>
 </div>
 <div class="game">
-    <img src="" class="yourImg" alt="">
-    <span class="result"></span>
-    <img src="" class="pcImg" alt="">
+    <div>比赛结果是：<span class="result"></span></div>
+    <ul>
+        <li>
+            <span>你出</span>
+            <img src="" class="yourImg" alt="">
+        </li>
+        <li>
+            <span>对方处</span>
+            <img src="" class="pcImg" alt="">
+        </li>
+    </ul>
 </div>
-
 <script src=lib/nebulas.js></script>
 <script>
     "use strict";
