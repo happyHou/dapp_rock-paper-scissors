@@ -8,7 +8,13 @@
             font-size:30px;
             color:rgb(42, 115, 138);
             text-decoration: none;
-            padding: 30px 100px;
+            line-height: 80px;
+            text-align: center;
+            margin-left:auto; 
+            margin-right:auto; 
+            margin-bottom: 40px;
+            background: url(./img/logo.png) no-repeat 20% center;
+            background-size: contain;
         }
         .all{
             margin-bottom: 90px;
@@ -29,6 +35,7 @@
             justify-content: space-around;
             margin:0 auto;
             list-style: none;
+            padding-left:0; 
         }
         .all div ul span{
             display: block;
@@ -41,12 +48,16 @@
             height: 260px;
         }
         .game div{
-
+            font-size: 20px;
+            line-height: 40px;
+            padding-left: 40px;
+            padding-top: 20px;   
         }
         .game ul{
             display: flex;
             justify-content: space-around;
             list-style: none;
+            padding-left: 0;
             
         }
         .game ul li{
@@ -90,7 +101,7 @@
             <img src="" class="yourImg" alt="">
         </li>
         <li>
-            <span>对方处</span>
+            <span>对方出</span>
             <img src="" class="pcImg" alt="">
         </li>
     </ul>
@@ -117,20 +128,24 @@
         result = document.querySelector('.result');
         shitou.addEventListener('click', function () {
             yourImg.src = 'img/shitou.jpg';
+            pcImg.src = "img/loading.gif";
+            result.innerHTML = '对方正在出...';
             result_var = shiTouResult;
             getRandom(result_var);
         }, false);
         jiandao.addEventListener('click', function () {
             yourImg.src = 'img/jiandao.jpg';
+            pcImg.src = "img/loading.gif";
+            result.innerHTML = '对方正在出...';
             result_var = jianDaoResult;
             getRandom(result_var);
         }, false);
         bu.addEventListener('click', function () {
             yourImg.src = 'img/bu.jpg';
+            pcImg.src = "img/loading.gif";
+            result.innerHTML = '对方正在出...';
             result_var=buResult;
             getRandom(result_var);
-
-
         }, false)
     };
 
@@ -192,7 +207,9 @@
 
         neb.api.call(from, dappAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
             if (succCallback) {
-                succCallback(resp.result)
+                // setTimeout(function(){
+                    succCallback(resp.result)
+                // },1000);
             }
         }).catch(function (err) {
             //cbSearch(err)
