@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dapp石头剪刀布(制胜策略)</title>
+</head>
+<body>
+<div class="all">
+    <img src="img/shitou.jpg" class="shitou" alt="">
+    <img src="img/jiandao.jpg" class="jiandao" alt="">
+    <img src="img/bu.jpg" class="bu" alt="">
+</div>
+<div class="game">
+    <img src="" class="yourImg" alt="">
+    <span class="result"></span>
+    <img src="" class="pcImg" alt="">
+</div>
+
+<script src=lib/nebulas.js></script>
+<script>
+    "use strict";
+
+    var dappAddress = "n1z5iC3Nf6j2PLXr4VyHVMmwPtMEFHrK4B5";
+
+    var nebulas = require("nebulas"),
+        Account = nebulas.Account,
+        neb = new nebulas.Neb();
+    neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
+    var shitou, jiandao, bu, yourImg, pcImg, result, result_var;
+
+    window.onload = function () {
+        // 选择图片
+        shitou = document.querySelector('.shitou');
+        jiandao = document.querySelector('.jiandao');
+        bu = document.querySelector('.bu');
+        yourImg = document.querySelector('.yourImg');
+        pcImg = document.querySelector('.pcImg');
+        result = document.querySelector('.result');
+        shitou.addEventListener('click', function () {
+            yourImg.src = 'img/shitou.jpg';
+            result_var = shiTouResult;
+            getRandom(result_var);
+        }, false);
+        jiandao.addEventListener('click', function () {
+            yourImg.src = 'img/jiandao.jpg';
+            result_var = jianDaoResult;
+            getRandom(result_var);
+        }, false);
+        bu.addEventListener('click', function () {
+            yourImg.src = 'img/bu.jpg';
+            result_var=buResult;
+            getRandom(result_var);
+
+
+        }, false)
+    };
+
+
+    function shiTouResult(random) {
+        console.log("hinihao",random)
+        if (random ==0) {
+            pcImg.src = 'img/jiandao.jpg';
+            result.innerHTML = '你赢了';
+        } else if (random==1) {
+            pcImg.src = 'img/shitou.jpg';
+            result.innerHTML = '平局';
+        } else if (random==2) {
+            pcImg.src = 'img/bu.jpg';
+            result.innerHTML = '你输了';
+        }
+
+    }
+
+    function jianDaoResult(random) {
+        if (random == 0) {
+            pcImg.src = 'img/jiandao.jpg';
+            result.innerHTML = '平';
+        } else if (random==1) {
+            pcImg.src = 'img/shitou.jpg';
+            result.innerHTML = '你输了';
+        } else if (random==2) {
+            pcImg.src = 'img/bu.jpg';
+            result.innerHTML ='你赢了';
+        }
+    }
+
+    function buResult(random) {
+        if (random==0) {
+            pcImg.src = 'img/jiandao.jpg';
+            result.innerHTML = '你输了';
+        } else if (random==1) {
+            pcImg.src = 'img/shitou.jpg';
+            result.innerHTML ='你赢了';
+        } else if (random==2) {
+            pcImg.src = 'img/bu.jpg';
+            result.innerHTML ='平';
+        }
+    }
+
+
+    function getRandom(succCallback) {
+        var from = Account.NewAccount().getAddressString();
+
+        var value = "0";
+        var nonce = "0"
+        var gas_price = "1000000"
+        var gas_limit = "2000000"
+        var callFunction = "letItGo";
+        var contract = {
+            "function": callFunction,
+            "args": ""
+        }
+
+        neb.api.call(from, dappAddress, value, nonce, gas_price, gas_limit, contract).then(function (resp) {
+            if (succCallback) {
+                succCallback(resp.result)
+            }
+        }).catch(function (err) {
+            //cbSearch(err)
+            console.log("error:" + err.message)
+        })
+    }
+</script>
+</body>
+</html>
